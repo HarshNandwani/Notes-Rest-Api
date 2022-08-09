@@ -1,19 +1,18 @@
 package com.example.rest_api.service.note
 
-import com.example.rest_api.model.entity.Note
-import com.example.rest_api.model.response.NoteSuccessResponse
+import com.example.rest_api.model.dto.PlainNote
 
 interface NoteService {
 
-    fun addNote(note: Note): Long
+    fun addNote(plainNote: PlainNote): Long
 
-    fun getAllNotes(): List<Note>
+    fun getAllNotes(): List<PlainNote>
 
-    fun getNoteById(id: Long): Note?
+    fun getNoteById(id: Long): PlainNote?
 
-    fun updateNote(note: Note): Long
+    fun updateNote(plainNote: PlainNote): Long
 
-    fun deleteNote(note: Note): Boolean
+    fun deleteNote(plainNote: PlainNote): Boolean
 
     fun deleteNoteById(id: Long): Boolean
 }

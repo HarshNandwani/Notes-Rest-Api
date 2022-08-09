@@ -1,5 +1,6 @@
 package com.example.rest_api.model.entity
 
+import com.example.rest_api.model.dto.PlainNote
 import javax.persistence.*
 
 @Entity
@@ -13,4 +14,14 @@ class Note(
     val title: String,
     @Column(nullable = false)
     val content: String
-)
+) {
+    constructor(
+        plainNote: PlainNote,
+        user: User
+    ) : this(
+        plainNote.id ?: -1L,
+        user,
+        plainNote.title,
+        plainNote.content
+    )
+}

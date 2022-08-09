@@ -39,8 +39,8 @@ class AuthorizationFilter : OncePerRequestFilter() {
         try {
             val jwtVerifier = JWT.require(Constants.jwtSigningAlgorithm).build()
             val decodedJWT = jwtVerifier.verify(token)
-            val username = decodedJWT.subject
-            val authenticationToken = UsernamePasswordAuthenticationToken(username, null, emptyList())
+            val subject = decodedJWT.subject
+            val authenticationToken = UsernamePasswordAuthenticationToken(subject, null, emptyList())
             SecurityContextHolder.getContext().authentication = authenticationToken
             filterChain.doFilter(request, response)
         } catch (e: JWTVerificationException) {

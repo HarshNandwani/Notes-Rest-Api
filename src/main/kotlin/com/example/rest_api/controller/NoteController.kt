@@ -1,6 +1,6 @@
 package com.example.rest_api.controller
 
-import com.example.rest_api.model.entity.Note
+import com.example.rest_api.model.dto.PlainNote
 import com.example.rest_api.model.response.NoteSuccessResponse
 import com.example.rest_api.service.note.NoteService
 import com.example.rest_api.utils.Constants
@@ -28,7 +28,7 @@ class NoteController {
     fun getAllNotes() = noteService.getAllNotes()
 
     @GetMapping("/{noteId}")
-    fun getNote(@PathVariable noteId: Long): ResponseEntity<Note> {
+    fun getNote(@PathVariable noteId: Long): ResponseEntity<PlainNote> {
         val note = noteService.getNoteById(noteId)
         note?.apply {
             return ResponseEntity.ok(this)
@@ -37,8 +37,8 @@ class NoteController {
     }
 
     @PostMapping
-    fun addNote(@RequestBody note: Note): ResponseEntity<NoteSuccessResponse> {
-        val id = noteService.addNote(note)
+    fun addNote(@RequestBody plainNote: PlainNote): ResponseEntity<NoteSuccessResponse> {
+        val id = noteService.addNote(plainNote)
         return ResponseEntity(
             NoteSuccessResponse(success = true, id = id),
             HttpStatus.CREATED
@@ -46,9 +46,9 @@ class NoteController {
     }
 
     @PutMapping
-    fun updateNote(@RequestBody note: Note): ResponseEntity<NoteSuccessResponse> {
-        val id = noteService.updateNote(note)
-        return if (id == note.id) {
+    fun updateNote(@RequestBody plainNote: PlainNote): ResponseEntity<NoteSuccessResponse> {
+        val id = noteService.updateNote(plainNote)
+        return if (id == plainNote.id) {
             ResponseEntity(HttpStatus.NO_CONTENT)
         } else {
             ResponseEntity(
