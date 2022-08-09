@@ -1,18 +1,18 @@
 package com.example.rest_api.model.entity
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
-data class User(
+class User(
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
+    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL])
+    val notes: List<Note>? = null,
+    @Column(nullable = false)
     val name: String,
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     val email: String,
-    val password: String
+    @Column(nullable = false)
+    val password: String,
 )

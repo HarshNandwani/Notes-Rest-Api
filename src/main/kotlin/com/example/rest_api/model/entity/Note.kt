@@ -1,15 +1,16 @@
 package com.example.rest_api.model.entity
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
-data class Note(
+class Note(
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
+    @ManyToOne
+    @JoinColumn(name = "userId", nullable = false)
+    val user: User? = null,
     val title: String,
+    @Column(nullable = false)
     val content: String
 )
