@@ -13,7 +13,7 @@ All endpoints end points use proper HTTP Status codes also all APIs expect /auth
 # How to run the project
 You would need [JDK 17 (preferably liberica jdk)](https://bell-sw.com/pages/downloads/#/java-17-current) and [MySQL server](https://dev.mysql.com/downloads/mysql/) installed.
 - Clone the project
-- Goto build\resources\main and open application-dev.properties
+- Goto src\main\resources and open application-dev.properties
 - Change the database URL, user and password to yours.
 - Come back to root folder and run ```./gradlew bootRun``` command
 
